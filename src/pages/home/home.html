@@ -10,9 +10,19 @@
 <ion-content padding>
   <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ul>
+    <li *ngFor="let item of items | async">
+      {{ item.name }}
+    </li>
+  </ul>
 
+  <ion-item>
+    <ion-item>
+      <ion-label fixed> nuevo item</ion-label>
+      <ion-input type="text" newItem></ion-input>
+    </ion-item>
+  </ion-item>
+  <button ion-button (click)="addItem()">adicionar</button>
+  <br>
   <button ion-button secondary menuToggle>Toggle Menu</button>
 </ion-content>
