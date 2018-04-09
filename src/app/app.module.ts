@@ -3,8 +3,6 @@ import { ErrorHandler, NgModule } from "@angular/core";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 
 import { MyApp } from "./app.component";
-import { HomePage } from "../pages/home/home";
-import { ListPage } from "../pages/list/list";
 
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
@@ -12,6 +10,7 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { AngularFireModule } from "angularfire2";
 import { AngularFirestoreModule } from "angularfire2/firestore";
 import { AngularFireAuthModule } from "angularfire2/auth";
+import { AuthProvider } from '../providers/auth/auth';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDHcCO5ucIL6SLTmb5lgFx-MkZUj4U-jqI",
@@ -23,7 +22,7 @@ export const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [MyApp, HomePage, ListPage],
+  declarations: [MyApp],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -32,11 +31,13 @@ export const firebaseConfig = {
     AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, HomePage, ListPage],
+  entryComponents: [MyApp],
   providers: [
     StatusBar,
     SplashScreen,
+    AuthProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
+
 export class AppModule {}
