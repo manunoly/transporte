@@ -12,6 +12,8 @@ import { AngularFirestoreModule } from "angularfire2/firestore";
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AuthProvider } from '../providers/auth/auth';
 
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyDHcCO5ucIL6SLTmb5lgFx-MkZUj4U-jqI",
   authDomain: "servi-ecuador.firebaseapp.com",
@@ -36,6 +38,7 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     AuthProvider,
+    BackgroundGeolocation,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
