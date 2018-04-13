@@ -13,6 +13,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { AuthProvider } from '../providers/auth/auth';
 
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+import { ConexionProvider } from '../providers/conexion/conexion';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDHcCO5ucIL6SLTmb5lgFx-MkZUj4U-jqI",
@@ -39,7 +40,8 @@ export const firebaseConfig = {
     SplashScreen,
     AuthProvider,
     BackgroundGeolocation,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    ConexionProvider
   ]
 })
 
