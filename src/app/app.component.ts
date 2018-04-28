@@ -4,6 +4,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
 import { AuthProvider } from "../providers/auth/auth";
+import { Geolocation } from "@ionic-native/geolocation";
 
 import {
   BackgroundGeolocation,
@@ -40,12 +41,15 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: "Inicio", component: "InicioPage", icon: "home" },
-      { title: "Solicitar Carrera", component: "MapaPage", icon: "navigate" },
       {
-        title: "Viajes Realizados",
-        component: "ViajesRealizadosPage",
-        icon: "archive"
-      }
+        title: "Solicitar Viaje",
+        component: "SolicitarViajePage",
+        icon: "navigate"
+      },{
+        title: "Solicitar Encomienda",
+        component: "SolicitarEncomiendaPage",
+        icon: "navigate"
+      },
     ];
   }
 
@@ -55,6 +59,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.backGroundGeolocation();
     });
   }
 

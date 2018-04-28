@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 
 import { Geolocation } from '@ionic-native/geolocation';
@@ -17,6 +17,7 @@ export class MapaPage {
   map: any;
   mapInitialised: boolean = false;
   apiKey = "AIzaSyAoLAnxwArlEsTDMKUfQX6Twj6EqobuZpc";
+  @ViewChild('map') mapElement: ElementRef;
 
   constructor(
     public navCtrl: NavController,
@@ -74,11 +75,21 @@ export class MapaPage {
   initMap() {
     this.mapInitialised = true;
 
-    Geolocation.getCurrentPosition().then(position => {
+    this.geolocation.getCurrentPosition().then(position => {
       let latLng = new google.maps.LatLng(
         position.coords.latitude,
         position.coords.longitude
       );
+
+      let mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    }).catch((error)=>{
+      let latLng = new google.maps.LatLng(-0.1911519, -78.4820116);
 
       let mapOptions = {
         center: latLng,

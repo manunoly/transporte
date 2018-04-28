@@ -14,6 +14,8 @@ import { AuthProvider } from '../providers/auth/auth';
 
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { ConexionProvider } from '../providers/conexion/conexion';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Network } from "@ionic-native/network";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDHcCO5ucIL6SLTmb5lgFx-MkZUj4U-jqI",
@@ -41,7 +43,9 @@ export const firebaseConfig = {
     AuthProvider,
     BackgroundGeolocation,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    ConexionProvider
+    ConexionProvider,
+    Geolocation,
+    Network
   ]
 })
 
