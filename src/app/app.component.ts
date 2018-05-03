@@ -1,3 +1,4 @@
+import { AuthProvider } from './../providers/auth/auth';
 import { Component, ViewChild } from "@angular/core";
 import { Nav, Platform } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
@@ -29,28 +30,36 @@ export class MyApp {
   };
 
   pages: Array<{ title: string; component: any; icon: any }>;
+  usuario: any;
 
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    private backgroundGeolocation: BackgroundGeolocation
+    private backgroundGeolocation: BackgroundGeolocation,
+    private auth: AuthProvider
   ) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
+    this.usuario = this.auth.currentUserObservable;
     this.pages = [
       { title: "Inicio", component: "InicioPage", icon: "home" },
       {
         title: "Solicitar Viaje",
         component: "SolicitarViajePage",
         icon: "navigate"
-      },{
+      },
+      {
         title: "Solicitar Encomienda",
         component: "SolicitarEncomiendaPage",
         icon: "navigate"
-      },
+      }
     ];
+  }
+
+  navegar(
+    navegarData = { title: "Inicio", component: "InicioPage", icon: "home" }
+  ) {
+    this.openPage(navegarData);
   }
 
   initializeApp() {

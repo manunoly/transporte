@@ -6,6 +6,13 @@
   </ion-header>
 
   <ion-content>
+
+  {{(usuario | async)| json}}
+
+    <ion-list>
+      <button ion-item block (click)="navegar({ title: 'Iniciar Sesión', component: 'LoginPage', icon: 'person' })"> Identificate </button>
+    </ion-list>
+
     <ion-list>
       <button ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
         <!-- <ion-icon item-start [name]="p.icon"></ion-icon> -->

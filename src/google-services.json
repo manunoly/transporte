@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "636867939821",
+    "firebase_url": "https://servi-ecuador.firebaseio.com",
+    "project_id": "servi-ecuador",
+    "storage_bucket": "servi-ecuador.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636867939821:android:c3c064b33d9e0a26",
+        "android_client_info": {
+          "package_name": "servi.transporte.manunoly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636867939821-tpop66gk6epn4q7368inedvhk7f92cd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChdc1T1ovXjXJPLHopmTSEpmh7Mbsc1DI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

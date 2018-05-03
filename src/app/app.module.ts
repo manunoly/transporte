@@ -17,6 +17,8 @@ import { ConexionProvider } from '../providers/conexion/conexion';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Network } from "@ionic-native/network";
 
+import { GooglePlus } from "@ionic-native/google-plus";
+
 export const firebaseConfig = {
   apiKey: "AIzaSyDHcCO5ucIL6SLTmb5lgFx-MkZUj4U-jqI",
   authDomain: "servi-ecuador.firebaseapp.com",
@@ -45,7 +47,8 @@ export const firebaseConfig = {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ConexionProvider,
     Geolocation,
-    Network
+    Network,
+    GooglePlus
   ]
 })
 
