@@ -16,15 +16,15 @@
 <ion-content padding>
   <div offset-md-4 col-md-4>
 
-    <button class="google"  ion-button block icon-only>
+    <button class="google"  ion-button block icon-only (click)="login(google)">
       <ion-icon item-start name="logo-google"></ion-icon> Inicia con Google(Gmail)
     </button>
 
-    <button item-start class="face" ion-button block icon-only>
+    <button item-start class="face" ion-button block icon-only (click)="login(face)">
       <ion-icon name="logo-facebook"></ion-icon> Inicia con Facebook
     </button>
 
-    <button class="twitter" ion-button block icon-only>
+    <button class="twitter" ion-button block icon-only (click)="login(twitter)">
       <ion-icon item-start name="logo-twitter"></ion-icon> Inicia con Twitter
     </button>
   </div>

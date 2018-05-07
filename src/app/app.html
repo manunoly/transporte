@@ -7,11 +7,31 @@
 
   <ion-content>
 
-  {{(usuario | async)| json}}
 
-    <ion-list>
-      <button ion-item block (click)="navegar({ title: 'Iniciar Sesión', component: 'LoginPage', icon: 'person' })"> Identificate </button>
+    <ion-list *ngIf="!(usuario | async);else usuarioPanel">
+      <button ion-item menuClose (click)="openPage(loginURL)">
+        <!-- <ion-icon item-start [name]="p.icon"></ion-icon> -->
+        <ion-icon item-start name="person" [color]="isActive(loginURL)"></ion-icon>
+        {{ loginURL.title }}
+      </button>
     </ion-list>
+
+    <ng-template #usuarioPanel>
+      <ion-list>
+        <ion-avatar class="profilepicsize">
+          <img style="border-radius: 50%;" [src]="usuario.picture">
+        </ion-avatar>
+        <button ion-item menuClose (click)="openPage(perfil)">
+          <ion-icon item-start [name]="perfil.icon" [color]="isActive(perfil)"></ion-icon>
+          {{usuario.displayName}}
+        </button>
+        <button ion-item title="Salir" clear menuClose (click)="logout()">
+          Salir
+          <ion-icon item-end name="log-out"></ion-icon>
+        </button>
+      </ion-list>
+    </ng-template>
+
 
     <ion-list>
       <button ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">

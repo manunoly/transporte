@@ -1,4 +1,3 @@
-import { AuthProvider } from './../providers/auth/auth';
 import { Component, ViewChild } from "@angular/core";
 import { Nav, Platform } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
@@ -31,6 +30,8 @@ export class MyApp {
 
   pages: Array<{ title: string; component: any; icon: any }>;
   usuario: any;
+  loginURL =  { title: 'Iniciar Sesión', component: 'LoginPage', icon: 'person' };
+  perfil =  { title: 'Perfil Usuario', component: 'LoginPage', icon: 'person' };
 
   constructor(
     public platform: Platform,
@@ -44,12 +45,12 @@ export class MyApp {
     this.pages = [
       { title: "Inicio", component: "InicioPage", icon: "home" },
       {
-        title: "Solicitar Viaje",
+        title: "Puerta a Puerta",
         component: "SolicitarViajePage",
         icon: "navigate"
       },
       {
-        title: "Solicitar Encomienda",
+        title: "Enviar Encomienda",
         component: "SolicitarEncomiendaPage",
         icon: "navigate"
       }
@@ -60,6 +61,10 @@ export class MyApp {
     navegarData = { title: "Inicio", component: "InicioPage", icon: "home" }
   ) {
     this.openPage(navegarData);
+  }
+
+  logout(){
+    this.auth.signOut();
   }
 
   initializeApp() {
