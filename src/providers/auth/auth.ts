@@ -21,7 +21,8 @@ export class AuthProvider {
   constructor(
     private afAuth: AngularFireAuth,
     private gplus: GooglePlus,
-    private platform: Platform
+    private platform: Platform,
+    private afs: AngularFirestore
   ) {
     if (this.platform.is("cordova")) {
       this.isCordova = true;
@@ -32,6 +33,46 @@ export class AuthProvider {
     this.afAuth.authState.subscribe(auth => {
       this.authState = auth;
     });
+  }
+
+  verificarPerfil() {
+    if (this.authenticated) {
+      let userD = this.afs
+        .doc<any>("usuarios/" + this.currentUserId)
+        .valueChanges()
+        .subscribe(datos => {
+          if (typeof datos == undefined || datos == null) {
+            /**
+             * Actualizar datos en la BD para tener datos basicos
+             */
+            this.afs
+              .doc<any>("usuarios/" + this.currentUserId)
+              .set({
+                actulizado: false,
+                phoneNumber: this.authState.phoneNumber,
+                photoURL: this.authState.photoURL,
+                displayName: this.authState.displayName,
+                email: this.authState.email,
+                emailVerified: this.authState.emailVerified
+              })
+              .then(_ => {
+                userD.unsubscribe();
+              });
+            userD.unsubscribe();
+          } else if (
+            datos.hasOwnProperty("actualizado") &&
+            datos["actualizado"]
+          ) {
+            /**
+             * utilizar los datos nuevos para mostrar
+             */
+            console.log(
+              "deberia utilizar estos datos para mostrar en el perfil" + datos
+            );
+            userD.unsubscribe();
+          } else userD.unsubscribe();
+        });
+    }
   }
 
   // Returns true if user is logged in
@@ -77,24 +118,25 @@ export class AuthProvider {
   }
 
   googleLogin() {
-    if (this.isCordova){
-      this.gplus.login({
-        'webClientId': 'AIzaSyDHcCO5ucIL6SLTmb5lgFx-MkZUj4U-jqI',
-        'offline': true,
-        'scopes': 'profile email'
-      }).then(resp=>{
-        return this.socialSignIn(resp.idToken);
-      }).catch(
+    if (this.isCordova) {
+      this.gplus
+        .login({
+          webClientId: "AIzaSyDHcCO5ucIL6SLTmb5lgFx-MkZUj4U-jqI",
+          offline: true,
+          scopes: "profile email"
+        })
+        .then(resp => {
+          return this.socialSignIn(resp.idToken);
+        })
+        .catch
         /**
          * manejar errores
          */
-      )
-    }
-    else{
+        ();
+    } else {
       const provider = new firebase.auth.GoogleAuthProvider();
       return this.socialSignIn(provider);
     }
-
   }
 
   facebookLogin() {
@@ -108,13 +150,21 @@ export class AuthProvider {
   }
 
   private socialSignIn(provider) {
-    return this.afAuth.auth
-      .signInWithPopup(provider)
-      .then(credential => {
-        this.authState = credential.user;
-        this.updateUserData();
-      })
-      .catch(error => console.log(error));
+    try {
+      return this.afAuth.auth
+        .signInWithPopup(provider)
+        .then(credential => {
+          this.authState = credential.user;
+          this.updateUserData();
+        })
+        .catch(error => {
+          console.log("error se captura en el auth");
+          return Promise.reject(new Error(error));
+        });
+    } catch (error) {
+      console.log("error se captura en el auth en catch del try");
+      return Promise.reject(new Error(error));
+    }
   }
 
   //// Anonymous Auth ////

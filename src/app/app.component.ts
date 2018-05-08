@@ -30,8 +30,12 @@ export class MyApp {
 
   pages: Array<{ title: string; component: any; icon: any }>;
   usuario: any;
-  loginURL =  { title: 'Iniciar Sesión', component: 'LoginPage', icon: 'person' };
-  perfil =  { title: 'Perfil Usuario', component: 'LoginPage', icon: 'person' };
+  loginURL = {
+    title: "Iniciar / Registrar",
+    component: "LoginPage",
+    icon: "person"
+  };
+  perfil = { title: "Perfil Usuario", component: "LoginPage", icon: "person" };
 
   constructor(
     public platform: Platform,
@@ -42,6 +46,11 @@ export class MyApp {
   ) {
     this.initializeApp();
     this.usuario = this.auth.currentUserObservable;
+    this.usuario.subscribe(userD=>{
+      if (userD){
+        this.auth.verificarPerfil();
+      }
+    })
     this.pages = [
       { title: "Inicio", component: "InicioPage", icon: "home" },
       {
@@ -63,7 +72,7 @@ export class MyApp {
     this.openPage(navegarData);
   }
 
-  logout(){
+  logout() {
     this.auth.signOut();
   }
 
@@ -75,6 +84,25 @@ export class MyApp {
       this.splashScreen.hide();
       this.backGroundGeolocation();
     });
+  }
+
+  loginRegister(page) {
+    try {
+      this.auth
+        .googleLogin()
+        .then(resp => {
+          console.log("OK");
+          console.log(resp);
+        })
+        .catch(error => {
+          console.log("error");
+          console.log(error);
+          this.openPage(page);
+        });
+    } catch (error) {
+      console.log("capturo en el app.component");
+      this.openPage(page);
+    }
   }
 
   openPage(page) {

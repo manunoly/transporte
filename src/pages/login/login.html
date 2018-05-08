@@ -13,35 +13,37 @@
 </ion-header>
 
 
-<ion-content padding>
-  <div offset-md-4 col-md-4>
+<ion-content padding offset-md-4 col-md-4>
 
-    <button class="google"  ion-button block icon-only (click)="login(google)">
+  <ion-card>
+    <ion-card-header>
+      Iniciar Sesión / Registrarse
+    </ion-card-header>
+    <ion-card-content>
+      Recomendamos los servicios de Google (Gmail) para el registro.
+    </ion-card-content>
+  </ion-card>
+
+  <div>
+    <button class="google" ion-button block icon-only (click)="login(google)">
       <ion-icon item-start name="logo-google"></ion-icon> Inicia con Google(Gmail)
     </button>
 
-    <button item-start class="face" ion-button block icon-only (click)="login(face)">
+    <button item-start class="face" ion-button block icon-only (click)="login('face')">
       <ion-icon name="logo-facebook"></ion-icon> Inicia con Facebook
     </button>
 
-    <button class="twitter" ion-button block icon-only (click)="login(twitter)">
+    <button class="twitter" ion-button block icon-only (click)="login('twitter')">
       <ion-icon item-start name="logo-twitter"></ion-icon> Inicia con Twitter
     </button>
   </div>
-  <ion-list>
-    <button ion-button icon-left block clear>
-      <ion-icon name="logo-google"></ion-icon>
-      Iniciar con Gmail
-    </button>
-    <button ion-button icon-left block clear>
-      <ion-icon name="logo-facebook"></ion-icon>
-      Iniciar con Facebook
-    </button>
-    <button ion-button icon-left block clear>
-      <ion-icon name="logo-twitter"></ion-icon>
-      Iniciar con Twitter
-    </button>
-  </ion-list>
 
-
+  <ion-card *ngIf="errorMsg">
+      <ion-card-header>
+        Error
+      </ion-card-header>
+      <ion-card-content>
+        {{errorMsg}}
+      </ion-card-content>
+    </ion-card>
 </ion-content>

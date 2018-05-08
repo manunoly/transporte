@@ -6,11 +6,9 @@
   </ion-header>
 
   <ion-content>
-
-
+    <br>
     <ion-list *ngIf="!(usuario | async);else usuarioPanel">
-      <button ion-item menuClose (click)="openPage(loginURL)">
-        <!-- <ion-icon item-start [name]="p.icon"></ion-icon> -->
+      <button ion-item menuClose (click)="loginRegister(loginURL)">
         <ion-icon item-start name="person" [color]="isActive(loginURL)"></ion-icon>
         {{ loginURL.title }}
       </button>
@@ -19,15 +17,15 @@
     <ng-template #usuarioPanel>
       <ion-list>
         <ion-avatar class="profilepicsize">
-          <img style="border-radius: 50%;" [src]="usuario.picture">
+          <img style="border-radius: 50%;" [src]="(usuario | async)?.photoURL ">
         </ion-avatar>
         <button ion-item menuClose (click)="openPage(perfil)">
           <ion-icon item-start [name]="perfil.icon" [color]="isActive(perfil)"></ion-icon>
-          {{usuario.displayName}}
+          {{(usuario | async)?.displayName}}
         </button>
         <button ion-item title="Salir" clear menuClose (click)="logout()">
           Salir
-          <ion-icon item-end name="log-out"></ion-icon>
+          <ion-icon item-start name="log-out"></ion-icon>
         </button>
       </ion-list>
     </ng-template>

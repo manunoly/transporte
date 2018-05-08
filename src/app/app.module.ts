@@ -18,6 +18,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Network } from "@ionic-native/network";
 
 import { GooglePlus } from "@ionic-native/google-plus";
+import { ApiProvider } from '../providers/api/api';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDHcCO5ucIL6SLTmb5lgFx-MkZUj4U-jqI",
@@ -48,7 +49,8 @@ export const firebaseConfig = {
     ConexionProvider,
     Geolocation,
     Network,
-    GooglePlus
+    GooglePlus,
+    ApiProvider
   ]
 })
 
