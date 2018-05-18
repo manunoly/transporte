@@ -9,12 +9,7 @@ import {
 
 import { Geolocation, Geoposition } from "@ionic-native/geolocation";
 import { ConexionProvider } from "./../../providers/conexion/conexion";
-/**
- * Generated class for the SolicitarViajePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 declare var google;
 
 @IonicPage()
@@ -101,7 +96,6 @@ export class SolicitarViajePage {
       this.loading.dismiss();
       mapEle.classList.add("show-map");
 
-      // this.map.addListener("bounds_changed", () => {
     });
 
     function actualizaCentro(env: any) {

@@ -19,6 +19,10 @@ import { Network } from "@ionic-native/network";
 
 import { GooglePlus } from "@ionic-native/google-plus";
 import { ApiProvider } from '../providers/api/api';
+import { Connectivity } from '../providers/connectivity-service/connectivity-service';
+import { GoogleMaps } from '../providers/google-maps/google-maps';
+
+import { LocationSelect } from '../pages/location-select/location-select';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDHcCO5ucIL6SLTmb5lgFx-MkZUj4U-jqI",
@@ -30,7 +34,7 @@ export const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [MyApp],
+  declarations: [MyApp, LocationSelect],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -39,7 +43,7 @@ export const firebaseConfig = {
     AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp],
+  entryComponents: [MyApp, LocationSelect],
   providers: [
     StatusBar,
     SplashScreen,
@@ -50,7 +54,9 @@ export const firebaseConfig = {
     Geolocation,
     Network,
     GooglePlus,
-    ApiProvider
+    ApiProvider,
+    Connectivity,
+    GoogleMaps
   ]
 })
 

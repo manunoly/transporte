@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ModalController } from 'ionic-angular';
 import { AuthProvider } from './../../providers/auth/auth';
+import { LocationSelect } from '../location-select/location-select';
 
 /**
  * Generated class for the InicioPage page.
@@ -16,12 +17,24 @@ import { AuthProvider } from './../../providers/auth/auth';
 })
 export class InicioPage {
 user : any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider) {
+  constructor(public navCtrl: NavController, private auth: AuthProvider, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
    this.user = this.auth.currentUserObservable;
    console.log(this.user);
   }
+
+  launchLocationPage(){
+
+    let modal = this.modalCtrl.create(LocationSelect);
+
+    modal.onDidDismiss((location) => {
+        console.log(location);
+    });
+
+    modal.present();
+
+}
 
 }
