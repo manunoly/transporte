@@ -86,7 +86,10 @@ export class GoogleMaps {
         let mapOptions = {
           center: latLng,
           zoom: 15,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          streetViewControl: false,
+          fullscreenControl: false,
+          disableDefaultUI: true
         };
 
         this.map = new google.maps.Map(this.mapElement, mapOptions);
@@ -123,7 +126,7 @@ export class GoogleMaps {
     });
 
     this.connectivityService.watchOffline().subscribe(() => {
-      // this.disableMap();
+      this.disableMap();
     });
   }
 }

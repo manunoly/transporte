@@ -28,7 +28,6 @@ export class LocationSelect {
 
   searchTerm: string = "";
   searchControl: FormControl;
-  items: any;
   searching: any = false;
 
   constructor(
@@ -43,11 +42,11 @@ export class LocationSelect {
   }
 
   ionViewDidLoad() {
-    this.searchControl.valueChanges.debounceTime(1900).subscribe(search => {
+    this.searchControl.valueChanges.debounceTime(900).subscribe(search => {
       this.searching = false;
       if (this.query.length > 2) {
         this.searchPlace();
-      }
+      } else if (this.query.length < 2) this.places = [];
     });
 
     let mapLoaded = this.maps

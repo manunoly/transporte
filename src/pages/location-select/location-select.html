@@ -1,6 +1,6 @@
-<ion-header  style="background-color: transparent">
-  <ion-navbar>
-    <ion-searchbar aria-placeholder="Escriba 3 caracteres" [(ngModel)]="query" [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
+<ion-header no-border>
+  <ion-navbar transparent>
+    <ion-searchbar style="background: transparent;" aria-placeholder="Escriba 3 caracteres" [(ngModel)]="query" [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
     <ion-buttons right>
       <button [disabled]="saveDisabled" ion-button small (click)="save()">Establecer</button>
       <button ion-button small (click)="close()">Cancelar</button>
