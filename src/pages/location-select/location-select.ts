@@ -22,9 +22,9 @@ export class LocationSelect {
   placesService: any;
   query: string = "";
   places: any = [];
-  searchDisabled: boolean;
-  saveDisabled: boolean;
+  searchDisabled: boolean = false;
   location: any;
+  mensajeViaje = "Recogerme en esta posición";
 
   searchTerm: string = "";
   searchControl: FormControl;
@@ -42,11 +42,13 @@ export class LocationSelect {
   }
 
   ionViewDidLoad() {
-    this.searchControl.valueChanges.debounceTime(900).subscribe(search => {
+    this.searchControl.valueChanges.debounceTime(1000).subscribe(search => {
       this.searching = false;
       if (this.query.length > 2) {
         this.searchPlace();
-      } else if (this.query.length < 2) this.places = [];
+      } else if (this.query.length < 2) {
+        this.places = [];
+      }
     });
 
     let mapLoaded = this.maps
@@ -56,7 +58,6 @@ export class LocationSelect {
         this.placesService = new google.maps.places.PlacesService(
           this.maps.map
         );
-        this.searchDisabled = false;
       });
   }
 
@@ -66,30 +67,17 @@ export class LocationSelect {
 
   selectPlace(place) {
     this.places = [];
-    let location = {
-      lat: null,
-      lng: null,
-      name: place.name
-    };
-
     this.placesService.getDetails({ placeId: place.place_id }, details => {
-      this.zone.run(() => {
-        location.name = details.name;
-        location.lat = details.geometry.location.lat();
-        location.lng = details.geometry.location.lng();
-        this.saveDisabled = false;
-
-        this.maps.map.setCenter({ lat: location.lat, lng: location.lng });
-
-        this.location = location;
+      this.maps.map.setCenter({
+        lat: details.geometry.location.lat(),
+        lng: details.geometry.location.lng()
       });
+      this.maps.updateMarker();
     });
   }
 
   searchPlace() {
-    this.saveDisabled = true;
-
-    if (this.query.length > 0 && !this.searchDisabled) {
+    if (this.query.length > 2 && !this.searchDisabled) {
       let config = {
         componentRestrictions: { country: "ec" },
         types: ["geocode"],
@@ -118,7 +106,34 @@ export class LocationSelect {
   }
 
   save() {
-    this.viewCtrl.dismiss(this.location);
+    let geocoder = new google.maps.Geocoder();
+    geocoder.geocode(
+      {
+        location: this.maps.getMarker.position
+      },
+      (results, status) => {
+        if (status === google.maps.GeocoderStatus.OK) {
+          if (results[0]) {
+            this.places = [];
+            let location = {
+              lat: results[0].geometry.location.lat(),
+              lng: results[0].geometry.location.lng(),
+              name: results[0].formatted_address,
+              geopoint: results[0].geometry.location,
+              place_id: results[0].place_id
+            };
+          } else {
+            /**TODO: mostrar mensaje  en errores
+             *
+             */
+            console.log("no se pudo establecer el lugar");
+          }
+        } else {
+          console.log("Geocoder failed: " + status);
+        }
+        this.viewCtrl.dismiss(location);
+      }
+    );
   }
 
   close() {

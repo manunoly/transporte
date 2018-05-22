@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController } from 'ionic-angular';
-import { AuthProvider } from './../../providers/auth/auth';
-import { LocationSelect } from '../location-select/location-select';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, ModalController } from "ionic-angular";
+import { AuthProvider } from "./../../providers/auth/auth";
+import { LocationSelect } from "../location-select/location-select";
 
 /**
  * Generated class for the InicioPage page.
@@ -12,29 +12,32 @@ import { LocationSelect } from '../location-select/location-select';
 
 @IonicPage()
 @Component({
-  selector: 'page-inicio',
-  templateUrl: 'inicio.html',
+  selector: "page-inicio",
+  templateUrl: "inicio.html"
 })
 export class InicioPage {
-user : any;
-  constructor(public navCtrl: NavController, private auth: AuthProvider, public modalCtrl: ModalController) {
-  }
+  user: any;
+  origen: any;
+  destino: any;
+
+  constructor(
+    public navCtrl: NavController,
+    private auth: AuthProvider,
+    public modalCtrl: ModalController
+  ) {}
 
   ionViewDidLoad() {
-   this.user = this.auth.currentUserObservable;
-   console.log(this.user);
+    this.user = this.auth.currentUserObservable;
+    console.log(this.user);
   }
 
-  launchLocationPage(){
-
+  launchLocationPage() {
     let modal = this.modalCtrl.create(LocationSelect);
 
-    modal.onDidDismiss((location) => {
-        console.log(location);
+    modal.onDidDismiss(location => {
+      console.log(location);
     });
 
     modal.present();
-
-}
-
+  }
 }

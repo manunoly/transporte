@@ -1,16 +1,62 @@
-<ion-header>
+<ion-navbar>
+  <ion-title>Bienvenidos</ion-title>
+</ion-navbar>
 
-  <ion-navbar>
-    <ion-title>Inicio</ion-title>
-  </ion-navbar>
-
-</ion-header>
 
 
 <ion-content padding>
+  <h3 color="primary">Próximas Salidas</h3>
+  <ion-list>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label floating>Origen</ion-label>
+          <ion-select interface="popover" [(ngModel)]="origen">
+            <ion-option value="nes">NES</ion-option>
+            <ion-option value="n64">Nintendo64</ion-option>
+            <ion-option value="ps">PlayStation</ion-option>
+            <ion-option value="genesis">Sega Genesis</ion-option>
+            <ion-option value="saturn">Sega Saturn</ion-option>
+            <ion-option value="snes">SNES</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label floating>Destino</ion-label>
+          <ion-select interface="popover" [(ngModel)]="destino">
+            <ion-option value="nes">NES</ion-option>
+            <ion-option value="n64">Nintendo64</ion-option>
+            <ion-option value="ps">PlayStation</ion-option>
+            <ion-option value="genesis">Sega Genesis</ion-option>
+            <ion-option value="saturn">Sega Saturn</ion-option>
+            <ion-option value="snes">SNES</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-item-group>
+      <ion-item-divider color="light">
+        Hoy</ion-item-divider>
+      <ion-item>Angola</ion-item>
+      <ion-item>Argentina</ion-item>
+    </ion-item-group>
+
+    <ion-item>
+      <h2>My Neighbor Totoro</h2>
+      <p>Hayao Miyazaki • 1988</p>
+      <button ion-button clear item-end>View</button>
+    </ion-item>
+    <ion-item>
+      <h2>My Neighbor Totoro</h2>
+      <p>Hayao Miyazaki • 1988</p>
+      <button ion-button clear item-end>View</button>
+    </ion-item>
+  </ion-list>
 
   Pagina de Inicio
- <br>
- <button ion-button (click)="launchLocationPage()">Launch</button>
+  <br>
+  <button ion-button (click)="launchLocationPage()">Launch</button>
   <!-- {{(user | async)| json}} -->
 </ion-content>

@@ -12,7 +12,7 @@ export class GoogleMaps {
   mapLoaded: any;
   mapLoadedObserver: any;
   currentMarker: any;
-
+  marker: any;
   /**
    * TODO: Ver como asegurar el API_KEY
    */
@@ -85,17 +85,63 @@ export class GoogleMaps {
 
         let mapOptions = {
           center: latLng,
-          zoom: 15,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-          streetViewControl: false,
+          zoom: 16,
+          mapTypeControl: false,
           fullscreenControl: false,
-          disableDefaultUI: true
+          streetViewControl: false,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
         this.map = new google.maps.Map(this.mapElement, mapOptions);
+        this.setMarker();
         resolve(true);
       });
     });
+  }
+
+  updateMarker(){
+    this.marker.setPosition({
+      lat: this.map.getCenter().lat(),
+      lng: this.map.getCenter().lng()
+    });
+    this.marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(() => {
+      this.marker.setAnimation(google.maps.Animation.DROP);
+      // this.marker.setAnimation(google.maps.Animation.NONE);
+    }, 1000);
+  }
+
+  setMarker() {
+    this.marker = new google.maps.Marker({
+      position: new google.maps.LatLng(
+        this.map.getCenter().lat(),
+        this.map.getCenter().lng()
+      ),
+      title: "Ubicación",
+      animation: google.maps.Animation.DROP,
+      map: this.map
+    });
+
+    let infowindow = new google.maps.InfoWindow({
+      content: "Punto establecido"
+    });
+
+    this.marker.addListener("click", () => {
+      infowindow.open(this.map, this.marker);
+    });
+
+    this.map.addListener("dragend", () => {
+      this.marker.setPosition(this.map.getCenter());
+      this.marker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(() => {
+        this.marker.setAnimation(google.maps.Animation.DROP);
+        // this.marker.setAnimation(google.maps.Animation.NONE);
+      }, 1000);
+    });
+  }
+
+  get getMarker(){
+    return this.marker;
   }
 
   disableMap(): void {

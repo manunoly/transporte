@@ -1,22 +1,28 @@
 <ion-header no-border>
   <ion-navbar transparent>
-    <ion-searchbar style="background: transparent;" aria-placeholder="Escriba 3 caracteres" [(ngModel)]="query" [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
+    <ion-searchbar style="background: transparent;" placeholder="3 caracteres min" [(ngModel)]="query" [formControl]="searchControl"
+      (ionInput)="onSearchInput()"></ion-searchbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-buttons right>
-      <button [disabled]="saveDisabled" ion-button small (click)="save()">Establecer</button>
-      <button ion-button small (click)="close()">Cancelar</button>
+      <button ion-button small (click)="save()">Guardar</button>
     </ion-buttons>
   </ion-navbar>
 
   <ion-list>
     <div *ngIf="searching" class="spinner-container">
-        <ion-item><ion-spinner name="dots" item-end></ion-spinner>Escribiendo 3 caracteres</ion-item>
+      <ion-item>
+        <ion-spinner name="dots" item-end></ion-spinner> 3 Caracteres Mínimo </ion-item>
     </div>
     <div *ngIf="!searching">
-    <ion-item text-wrap *ngFor="let place of places" (clic)="selectPlace(place)">{{place.description}}
-      <button ion-button small clear item-end icon-left (click)="selectPlace(place)">
-        <ion-icon name="navigate"></ion-icon> IR </button>
-    </ion-item>
-  </div>
+      <ion-item text-wrap *ngFor="let place of places" (touchstart)="selectPlace(place)" (clic)="selectPlace(place)">{{place.description}}
+        <button ion-button small clear item-end icon-left (click)="selectPlace(place)">
+          <ion-icon name="navigate"></ion-icon> IR </button>
+      </ion-item>
+    </div>
   </ion-list>
 
 </ion-header>
@@ -24,7 +30,7 @@
 <ion-content>
 
   <div #pleaseConnect id="please-connect">
-    <p>Please connect to the Internet...</p>
+    <p>Conectando a Internet...</p>
   </div>
 
   <div #map id="map">
