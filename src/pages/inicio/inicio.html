@@ -5,7 +5,6 @@
 
 
 <ion-content padding>
-  <h3 color="primary">Próximas Salidas</h3>
   <ion-list>
     <ion-row>
       <ion-col>
@@ -15,7 +14,7 @@
             <ion-option value="nes">NES</ion-option>
             <ion-option value="n64">Nintendo64</ion-option>
             <ion-option value="ps">PlayStation</ion-option>
-            <ion-option value="genesis">Sega Genesis</ion-option>
+            <ion-option value="genesis">Sega Genesis asdfasdfasdf as dfasd OK</ion-option>
             <ion-option value="saturn">Sega Saturn</ion-option>
             <ion-option value="snes">SNES</ion-option>
           </ion-select>
@@ -28,31 +27,44 @@
             <ion-option value="nes">NES</ion-option>
             <ion-option value="n64">Nintendo64</ion-option>
             <ion-option value="ps">PlayStation</ion-option>
-            <ion-option value="genesis">Sega Genesis</ion-option>
+            <ion-option value="genesis">Sega Genesis adfa daf ds</ion-option>
             <ion-option value="saturn">Sega Saturn</ion-option>
             <ion-option value="snes">SNES</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>
-
-    <ion-item-group>
-      <ion-item-divider color="light">
-        Hoy</ion-item-divider>
-      <ion-item>Angola</ion-item>
-      <ion-item>Argentina</ion-item>
-    </ion-item-group>
-
-    <ion-item>
-      <h2>My Neighbor Totoro</h2>
-      <p>Hayao Miyazaki • 1988</p>
-      <button ion-button clear item-end>View</button>
-    </ion-item>
-    <ion-item>
-      <h2>My Neighbor Totoro</h2>
-      <p>Hayao Miyazaki • 1988</p>
-      <button ion-button clear item-end>View</button>
-    </ion-item>
+      <ion-item-divider color="light">Trayectos</ion-item-divider>
+      <ion-item text-wrap (touchstart)="reservarRuta(123)">
+        <h2>Origen: Quito => Destino: Ambato</h2>
+        <p>
+          <b>Dias:</b>
+          <br> lunes, martes, miercoles, jueves, viernes, sabado, domingo</p>
+        <p>
+          <b>Horarios:</b>
+          <br>16:00, 17:00, 18:00, 6:00, 7:00, 16:00, 17:00, 18:00, 6:00, 7:00</p>
+        <button ion-button clear item-end (click)="reservarRuta(123)">
+          Pedir
+        </button>
+      </ion-item>
+      <ion-item text-wrap>
+        <h2>Origen: Quito => Destino: Otavalo</h2>
+        <p>Hora de Salida:
+          <b>16:00</b>
+        </p>
+        <button ion-button clear item-end>
+          Pedir
+        </button>
+      </ion-item>
+      <ion-item text-wrap>
+        <h2>Origen: Quito => Destino: Ibarra</h2>
+        <p>Hora de Salida:
+          <b>16:00</b>
+        </p>
+        <button ion-button clear item-end>
+          Pedir
+        </button>
+      </ion-item>
   </ion-list>
 
   Pagina de Inicio

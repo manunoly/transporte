@@ -40,4 +40,8 @@ export class InicioPage {
 
     modal.present();
   }
+
+  reservarRuta(id){
+    this.navCtrl.push("ReservarRutaPage");
+  }
 }
